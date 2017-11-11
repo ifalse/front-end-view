@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="login">
         <form action="#" method="post" class="container offset1 loginform">
-          <div id="owl-login" class="">
+          <div id="owl-login" :class="{password:inpassword}">
             <div class="hand"></div>
             <div class="hand hand-r"></div>
             <div class="arms">
@@ -22,7 +22,7 @@
             <div class="control-group">
               <div class="controls">
                 <label for="password" class="glyphicon glyphicon-lock"></label>
-                <input id="password" type="password" name="password" placeholder="Password" tabindex="2" class="form-control input-medium">
+                <input @focus="focus" @blur="blur" id="password" type="password" name="password" placeholder="Password" tabindex="2" class="form-control input-medium">
               </div>
             </div>
           </div>
@@ -42,7 +42,16 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      inpassword: false
+    }
+  },
+  methods: {
+    focus: function (event) {
+      this.inpassword = true
+    },
+    blur: function (event) {
+      this.inpassword = false
     }
   }
 }
