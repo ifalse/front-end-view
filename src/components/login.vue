@@ -16,20 +16,20 @@
             <div class="control-group">
               <div class="controls">
                 <label for="username" class="glyphicon glyphicon-user"></label>
-                <input id="username" type="text" name="username" placeholder="Email" tabindex="1" autofocus="autofocus" class="form-control input-medium">
+                <input v-model="username" id="username" type="text" name="username" placeholder="Email" tabindex="1" autofocus="autofocus" class="form-control input-medium">
               </div>
             </div>
             <div class="control-group">
               <div class="controls">
                 <label for="password" class="glyphicon glyphicon-lock"></label>
-                <input @focus="focus" @blur="blur" id="password" type="password" name="password" placeholder="Password" tabindex="2" class="form-control input-medium">
+                <input @focus="inpassword = true" @blur="inpassword = false" v-model="password" id="password" type="password" name="password" placeholder="Password" tabindex="2" class="form-control input-medium">
               </div>
             </div>
           </div>
           <div class="form-actions">
             <a href="#" tabindex="5" class="btn pull-left btn-link text-muted">Forgot password?</a>
-            <a href="#" tabindex="6" class="btn btn-link text-muted" id="register-in">Sign Up</a>
-            <button type="button" tabindex="4" class="btn btn-primary" id="login-in">Login</button>
+            <a href="#/register" tabindex="6" class="btn btn-link text-muted" id="register-in">Sign Up</a>
+            <button @click="login" type="button" tabindex="4" class="btn btn-primary" id="login-in">Login</button>
           </div>
         </form>
       </div>
@@ -39,19 +39,32 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'login',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      username: '',
+      password: '',
       inpassword: false
     }
   },
   methods: {
-    focus: function (event) {
-      this.inpassword = true
-    },
-    blur: function (event) {
-      this.inpassword = false
+    login () {
+      let params = {
+        username: this.username,
+        password: this.password
+      }
+      // 获取已有账号密码
+      this.$http.post('/api/login', params)
+      .then((response) => {
+        // 响应成功回调
+        console.log(response)
+      })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((reject) => {
+        console.log(reject)
+      })
     }
   }
 }
