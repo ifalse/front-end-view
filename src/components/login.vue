@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div id="login" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="wrapper">
       <div class="login">
         <form action="#" method="post" class="container offset1 loginform">
@@ -44,25 +44,47 @@ export default {
     return {
       username: '',
       password: '',
-      inpassword: false
+      inpassword: false,
+      fullscreenLoading: false
     }
   },
   methods: {
     login () {
+      const that = this
       let params = {
         username: this.username,
         password: this.password
       }
+      that.fullscreenLoading = true
       // 获取已有账号密码
       this.$http.post('/api/login', params)
       .then((response) => {
+        that.fullscreenLoading = false
         // 响应成功回调
-        console.log(response)
-      })
-      .then((response) => {
-        console.log(response)
+        if (response.data.code === 1) {
+          that.$message({
+            showClose: true,
+            message: response.data.err,
+            type: 'success'
+          })
+          setTimeout(function () {
+            that.$router.push('/')
+          }, 3000)
+        } else if (response.data.code === 2) {
+          that.$message({
+            showClose: true,
+            message: response.data.err,
+            type: 'warning'
+          })
+        }
       })
       .catch((reject) => {
+        that.fullscreenLoading = false
+        that.$message({
+          showClose: true,
+          message: reject.statusText,
+          type: 'error'
+        })
         console.log(reject)
       })
     }

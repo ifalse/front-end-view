@@ -11,7 +11,10 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "babel-plugin-component": "^0.10.1",
+    "babel-preset-latest": "^6.24.1",
     "bcrypt": "^1.0.3",
+    "element-ui": "^2.0.4",
     "express": "^4.16.2",
     "mongoose": "^4.13.1",
     "vue": "^2.5.2",
