@@ -13,7 +13,7 @@ Vue.use(Input)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
-Vue.prototype.$help = new Vue() // 用来组件之间进行通信
+// Vue.prototype.$help = new Vue() // 用来组件之间进行通信
 
 /* eslint-disable no-new */
 new Vue({
