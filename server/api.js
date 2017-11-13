@@ -2,7 +2,7 @@ const models = require('./db')
 const express = require('express')
 const router = express.Router()
 
-router.route('/login').post(function (req, res) { // 从此路径检测到post方式则进行post数据的处理操作
+router.route('/api/login').post(function (req, res) { // 从此路径检测到post方式则进行post数据的处理操作
   // get User info
   // 这里的User就是从model中获取user对象，通过global.dbHandel全局方法（这个方法在app.js中已经实现)
   var User = models.User
@@ -27,7 +27,7 @@ router.route('/login').post(function (req, res) { // 从此路径检测到post�
   })
 })
 
-router.route('/register').post(function (req, res) {
+router.route('/api/register').post(function (req, res) {
   // 这里的User就是从model中获取user对象，通过global.dbHandel全局方法（这个方法在app.js中已经实现)
   var User = models.User
   var uname = req.body.username
